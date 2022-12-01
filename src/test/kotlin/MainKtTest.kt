@@ -14,5 +14,10 @@ internal class MainKtTest {
         System.setIn("4".byteInputStream())
         assertEquals(4, renderMenu())
     }
+    @Test
+    fun `renderMenu chosen 0 when System InputStream contains A`() {
+        System.setIn("A".byteInputStream())
+        assertEquals(0, renderMenu())
+    }
 
 }
