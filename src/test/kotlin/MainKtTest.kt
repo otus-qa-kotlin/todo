@@ -1,10 +1,18 @@
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
+import kotlin.test.assertEquals
 
 internal class MainKtTest {
 
     @Test
-    fun renderMenu() {
+    fun `renderMenu chosen 3 when System InputStream contains 3`() {
+        System.setIn("3".byteInputStream())
+        assertEquals(3, renderMenu())
     }
+
+    @Test
+    fun `renderMenu chosen 4 when System InputStream contains 4`() {
+        System.setIn("4".byteInputStream())
+        assertEquals(4, renderMenu())
+    }
+
 }
