@@ -14,6 +14,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.0")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.20")
 }
 
