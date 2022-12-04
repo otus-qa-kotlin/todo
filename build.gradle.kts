@@ -3,6 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.7.20"
     application
+    jacoco
+    id("io.qameta.allure") version "2.11.2"
 }
 
 group = "org.example"
@@ -21,6 +23,7 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    finalizedBy("jacocoTestReport", "allureReport")
 }
 
 tasks.withType<KotlinCompile> {
