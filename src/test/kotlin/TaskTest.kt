@@ -1,6 +1,6 @@
 import data.Priority
 import data.Task
-import org.junit.jupiter.api.Test
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 internal class TaskTest {

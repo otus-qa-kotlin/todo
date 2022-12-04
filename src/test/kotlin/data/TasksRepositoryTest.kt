@@ -1,16 +1,14 @@
 package data
 
-import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
-import org.junit.platform.engine.reporting.ReportEntry
+import kotlin.test.Test
+import kotlin.test.BeforeTest
+import kotlin.test.assertEquals
 
 class TasksRepositoryTest {
 
     private lateinit var repository: TasksRepository
 
-    @BeforeEach
+    @BeforeTest
     fun setUp() {
         val tasksRepositoryMemory = TasksRepositoryMemory()
         with(tasksRepositoryMemory.tasks) {
