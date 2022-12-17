@@ -1,10 +1,14 @@
-package data
+package ru.otus.data
 
+import org.springframework.stereotype.Component
+
+@Component
 class TasksRepositoryMemory : TasksRepository() {
 
     val tasks = mutableListOf<Task>()
 
     fun nextId(): Int = tasks.maxByOrNull { it.id ?: 0 }?.id?.inc() ?: 1
+
     override fun getTasks(completed: Boolean): List<Task> {
         var filteredTasks = tasks.toList()
         if (!completed) filteredTasks = filteredTasks.filter { !it.completed }

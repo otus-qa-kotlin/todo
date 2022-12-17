@@ -1,8 +1,8 @@
 package menu
 
-import data.Priority
-import data.Task
-import data.TasksRepository
+import ru.otus.data.Priority
+import ru.otus.data.Task
+import ru.otus.data.TasksRepository
 import kotlin.system.exitProcess
 
 fun addTaskFromMenu(repository: TasksRepository) {

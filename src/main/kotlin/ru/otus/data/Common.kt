@@ -1,4 +1,6 @@
-package data
+package ru.otus.data
+
+import com.fasterxml.jackson.annotation.JsonProperty
 
 enum class Priority {
     LOW,
@@ -6,7 +8,15 @@ enum class Priority {
     HIGH
 }
 
-data class Task(val id: Int? = null, val name: String, var priority: Priority, var completed: Boolean = false) {
+data class Task(
+    @JsonProperty(value = "id")
+    var id: Int? = null,
+    @JsonProperty(value = "name", required = true)
+    val name: String,
+    @JsonProperty(value = "priority", required = true)
+    var priority: Priority,
+    @JsonProperty(value = "completed")
+    var completed: Boolean = false) {
     override fun toString(): String = ("$id. [${if (completed) "x" else " "}] $name : ${priority}")
 }
 
