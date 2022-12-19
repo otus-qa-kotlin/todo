@@ -22,9 +22,9 @@ class ExceptionHandler {
     fun handleException(e: DeleteCompletedTaskException?) {
     }
 
-    @ResponseStatus(value = HttpStatus.ALREADY_REPORTED, reason = "Task already completed!")
-    @ExceptionHandler(TaskAlreadyCompleteException::class)
-    fun handleException(e: TaskAlreadyCompleteException?) {
+    @ResponseStatus(value = HttpStatus.ALREADY_REPORTED, reason = "Task already completed|uncompleted!")
+    @ExceptionHandler(TaskCompletingError::class)
+    fun handleException(e: TaskCompletingError?) {
     }
 
 
@@ -38,4 +38,4 @@ class InvalidTaskException : Exception()
 class AddCompletedTaskException : Exception()
 class DeleteCompletedTaskException : Exception()
 class TaskNotFoundException : Exception()
-class TaskAlreadyCompleteException: Exception()
+class TaskCompletingError: Exception()

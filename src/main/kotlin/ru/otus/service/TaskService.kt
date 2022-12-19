@@ -34,10 +34,26 @@ class TaskService(private val taskRepo: TasksRepositoryMemory) {
             throw InvalidTaskException()
         }
         taskRepo.getTasks(true).find { it.id == id }?.let {
-            throw TaskAlreadyCompleteException()
+            throw TaskCompletingError()
         }
         taskRepo.getTasks(false).find { it.id == id }?.let {
             taskRepo.completeTask(id)
         } ?: throw TaskNotFoundException()
+    }
+
+    fun uncompleteTask(id: Int) {
+        if (id < 0) {
+            throw InvalidTaskException()
+        }
+        taskRepo.getTasks(false).find { it.id == id }?.let {
+            throw TaskCompletingError()
+        }
+        taskRepo.getTasks(true).find { it.id == id }?.let {
+            taskRepo.uncompleteTask(id)
+        } ?: throw  TaskNotFoundException()
+    }
+
+    fun getTasks(completed: Boolean): List<Task> {
+        return taskRepo.getTasks(completed).sortedByDescending { it.priority }
     }
 }

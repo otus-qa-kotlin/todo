@@ -2,6 +2,7 @@ package ru.otus.controller
 
 import ru.otus.data.Task
 import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
@@ -15,7 +16,7 @@ import ru.otus.service.TaskService
 @RequestMapping("api/v1/tasks")
 class TaskController(private val taskService: TaskService) {
 
-    @PostMapping("/")
+    @PostMapping
     fun addTask(@RequestBody task: Task): Task {
         return taskService.addTask(task)
     }
@@ -26,19 +27,17 @@ class TaskController(private val taskService: TaskService) {
     }
 
     @PutMapping("/complete/{id}")
-    fun completeTask(@RequestParam("id") id: Int) {
+    fun completeTask(@PathVariable("id") id: Int) {
         taskService.completeTask(id)
     }
 
     @PutMapping("/uncomplete/{id}")
-    fun uncompleteTask(@RequestParam("id") id: Int) {
-
+    fun uncompleteTask(@PathVariable("id") id: Int) {
+        taskService.uncompleteTask(id)
     }
 
-//    @GetMapping
-//    fun getTasks(): List<Task> {
-//
-//    }
-
-
+    @GetMapping
+    fun getTasks(@RequestParam("done") done: Boolean): List<Task> {
+        return taskService.getTasks(done)
+    }
 }
