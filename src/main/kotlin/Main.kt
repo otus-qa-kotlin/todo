@@ -22,7 +22,7 @@ fun main() {
         try {
             val func = taskActions[Actions.values()[action - 1]]
             func?.call(repository)
-        } catch (e: Exception) {
+        } catch (e: ArrayIndexOutOfBoundsException) {
             //just skip
         }
     }
