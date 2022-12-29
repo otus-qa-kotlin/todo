@@ -28,7 +28,7 @@ class TaskController(private val taskService: TaskService) {
     }
 
     @PutMapping("/status/{id}")
-    fun completeTask(@PathVariable("id") id: Int, @PathParam("done") status: Boolean) {
+    fun completeTask(@PathVariable("id") id: Int, @RequestParam("done") status: Boolean) {
         if (status) {
             return taskService.completeTask(id)
         }
