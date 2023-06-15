@@ -11,7 +11,7 @@ data class Task(val id: Int? = null, val name: String, var priority: Priority, v
 }
 
 abstract class TasksRepository {
-    abstract fun getTasks(completed: Boolean = true): List<Task>
+    abstract fun getTasks(completed: Boolean? = null): List<Task>
     abstract fun addTask(task: Task): Int
     abstract fun deleteTask(id: Int)
     abstract fun completeTask(id: Int)

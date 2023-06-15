@@ -5,10 +5,10 @@ class TasksRepositoryMemory : TasksRepository() {
     val tasks = mutableListOf<Task>()
 
     fun nextId(): Int = tasks.maxByOrNull { it.id ?: 0 }?.id?.inc() ?: 1
-    override fun getTasks(completed: Boolean): List<Task> {
-        var filteredTasks = tasks.toList()
-        if (!completed) filteredTasks = filteredTasks.filter { !it.completed }
-        return filteredTasks
+    override fun getTasks(completed: Boolean?): List<Task> {
+        return tasks
+            .toList()
+            .filter { completed == null || it.completed == completed }
     }
 
     override fun addTask(task: Task): Int {
