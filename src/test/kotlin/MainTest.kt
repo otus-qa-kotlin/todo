@@ -14,14 +14,19 @@ class MainTest {
     private lateinit var testRepository: TasksRepository
     private val faker = Faker()
 
+    private fun createNewTask(repository: TasksRepository, faker: Faker): Int {
+        val name = faker.cowboyBebop.character()
+        val priority = Priority.values().random()
+        return repository.addTask(Task(name = name, priority = priority))
+    }
+
+
     @BeforeTest
     fun populateTasks() {
         val tasksRepositoryMemory = TasksRepositoryMemory()
         val iterations = faker.random.nextInt(2, 5)
         for (i in 1..iterations) {
-            val name = faker.cowboyBebop.character()
-            val priority = Priority.values().random()
-            tasksRepositoryMemory.addTask(Task(name = name, priority = priority))
+            createNewTask(tasksRepositoryMemory,faker)
         }
         testRepository = tasksRepositoryMemory
     }
@@ -29,9 +34,7 @@ class MainTest {
     @Test
     @Description("Добавление задачи и появление ее в списке")
     fun addTaskAndCheckAppearanceTest() {
-        val name = faker.cowboyBebop.character()
-        val priority = Priority.values().random()
-        val newTaskId = testRepository.addTask(Task(name = name, priority = priority))
+        val newTaskId = createNewTask(testRepository,faker)
         val lastIdFromTaskList = testRepository.getTasks().last().id
         assertEquals(newTaskId, lastIdFromTaskList)
     }
@@ -39,9 +42,7 @@ class MainTest {
     @Test
     @Description("Завершить задачу и проверить корректность работы фильтра по завершенным задачам")
     fun checkFinishFilterAfterFinishTaskTest() {
-        val name = faker.cowboyBebop.character()
-        val priority = Priority.values().random()
-        val newTaskId = testRepository.addTask(Task(name = name, priority = priority))
+        val newTaskId = createNewTask(testRepository,faker)
         testRepository.completeTask(newTaskId)
         val listOfCompletedTasks = testRepository.getTasks(completed = true).size
         assertEquals(1, listOfCompletedTasks, "Expected 1 task in filter, but got $listOfCompletedTasks")
