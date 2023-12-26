@@ -2,14 +2,14 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val allureVersion = "2.24.0"
 val aspectJVersion = "1.9.20.1"
 val exposedVersion = "0.44.1"
-val serenityVersion = "3.0.0"
+
 val agent: Configuration by configurations.creating {
     isCanBeConsumed = true
     isCanBeResolved = true
 }
 plugins {
     kotlin("jvm") version "1.9.21"
-    id("net.serenity-bdd.serenity-gradle-plugin") version "3.0.0"
+    id("net.serenity-bdd.serenity-gradle-plugin") version "4.0.30"
     application
 
 }
