@@ -2,13 +2,16 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val allureVersion = "2.24.0"
 val aspectJVersion = "1.9.20.1"
 val exposedVersion = "0.44.1"
+val serenityVersion = "3.0.0"
 val agent: Configuration by configurations.creating {
     isCanBeConsumed = true
     isCanBeResolved = true
 }
 plugins {
     kotlin("jvm") version "1.9.21"
+    id("net.serenity-bdd.serenity-gradle-plugin") version "3.0.0"
     application
+
 }
 
 group = "org.example"
@@ -29,6 +32,9 @@ dependencies {
     testImplementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
     testImplementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
     testImplementation("org.xerial:sqlite-jdbc:3.44.0.0")
+    testImplementation("net.serenity-bdd:serenity-core:4.0.28")
+    testImplementation("net.serenity-bdd:serenity-junit5:4.0.28")
+
     agent("org.aspectj:aspectjweaver:${aspectJVersion}")
 }
 
