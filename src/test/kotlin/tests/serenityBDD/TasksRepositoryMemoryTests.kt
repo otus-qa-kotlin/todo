@@ -19,7 +19,7 @@ import kotlin.streams.toList
 class TasksRepositoryMemoryTests {
     @AfterEach
     fun cleanRepository() {
-        steps.clearRepository()
+        repository.clearRepository()
     }
 
     private val testDataRepository = TestDataRepository()
@@ -29,53 +29,52 @@ class TasksRepositoryMemoryTests {
     }
 
     @Steps
-    lateinit var steps: TasksRepositoryMemorySteps
+    lateinit var repository: TasksRepositoryMemorySteps
 
     @ParameterizedTest
     @MethodSource("getStreamOfTestTasks")
     fun addTask(task: Task) {
-        val addedTask: Task = steps.addTask(task)
-        steps.checkIfTaskInRepository(addedTask)
+        val addedTask: Task = repository.addTask(task)
+        repository.checkIfTaskInRepository(addedTask)
     }
 
     @Test
     fun checkFilterOfTasksIncludingCompleted() {
         val tasks: List<Task> = getStreamOfTestTasks().toList()
 
-        val tasksAfterAdding = steps.addGroupOfTasks(tasks)
-        val indexOfCompletedTask = steps.completeRandomTask(tasksAfterAdding)
+        val tasksAfterAdding = repository.addGroupOfTasks(tasks)
+        val indexOfCompletedTask = repository.completeRandomTask(tasksAfterAdding)
         val completedTask = tasksAfterAdding[indexOfCompletedTask]
-        steps.checkFilterOfTasksIncludingCompleted(completedTask)
+        repository.checkFilterOfTasksIncludingCompleted(completedTask)
     }
 
     @Test
     fun checkFilterOfTasksExcludingCompleted() {
         val tasks: List<Task> = getStreamOfTestTasks().toList()
 
-        val tasksAfterAdding = steps.addGroupOfTasks(tasks)
-        val indexOfCompletedTask = steps.completeRandomTask(tasksAfterAdding)
+        val tasksAfterAdding = repository.addGroupOfTasks(tasks)
+        val indexOfCompletedTask = repository.completeRandomTask(tasksAfterAdding)
         val completedTask = tasksAfterAdding[indexOfCompletedTask]
-        steps.checkFilterOfTasksExcludingCompleted(completedTask)
+        repository.checkFilterOfTasksExcludingCompleted(completedTask)
     }
 
     @Test
     fun deleteTaskFromRepository() {
         val tasks: List<Task> = getStreamOfTestTasks().toList()
-        val tasksAfterAdding = steps.addGroupOfTasks(tasks)
-        val indexOfDeletedTask = steps.deleteTask(tasksAfterAdding)
+        val tasksAfterAdding = repository.addGroupOfTasks(tasks)
+        val indexOfDeletedTask = repository.deleteTask(tasksAfterAdding)
         val deletedTask = tasksAfterAdding[indexOfDeletedTask]
-        steps.checkIfDeletedTaskNotInRepository(deletedTask)
+        repository.checkIfDeletedTaskNotInRepository(deletedTask)
     }
 
     @Test
     fun uncompleteTask() {
         val tasks: List<Task> = getStreamOfTestTasks().toList()
 
-        val tasksAfterAdding = steps.addGroupOfTasks(tasks)
-        val indexOfCompletedTask = steps.completeRandomTask(tasksAfterAdding)
+        val tasksAfterAdding = repository.addGroupOfTasks(tasks)
+        val indexOfCompletedTask = repository.completeRandomTask(tasksAfterAdding)
         val uncompletedTask = tasksAfterAdding[indexOfCompletedTask]
-        steps.uncompleteTask(indexOfCompletedTask)
-        steps.checkIfTaskUncompleted(uncompletedTask)
+        repository.uncompleteTask(indexOfCompletedTask)
+        repository.checkIfTaskUncompleted(uncompletedTask)
     }
 }
-

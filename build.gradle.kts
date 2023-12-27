@@ -10,7 +10,11 @@ val agent: Configuration by configurations.creating {
 plugins {
     kotlin("jvm") version "1.9.21"
     id("net.serenity-bdd.serenity-gradle-plugin") version "4.0.30"
+    id("io.qameta.allure") version "2.11.2"
+    id("org.jlleitschuh.gradle.ktlint") version "12.0.3"
+    id("io.gitlab.arturbosch.detekt") version "1.23.4"
     application
+    checkstyle
 
 }
 
@@ -34,6 +38,10 @@ dependencies {
     testImplementation("org.xerial:sqlite-jdbc:3.44.0.0")
     testImplementation("net.serenity-bdd:serenity-core:4.0.28")
     testImplementation("net.serenity-bdd:serenity-junit5:4.0.28")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation("org.junit.platform:junit-platform-suite:1.8.1")
+    testImplementation("io.cucumber:cucumber-java8:7.0.0")
+    testImplementation("io.cucumber:cucumber-junit-platform-engine:7.0.0")
 
     agent("org.aspectj:aspectjweaver:${aspectJVersion}")
 }
