@@ -54,4 +54,3 @@ val taskActions = mapOf(
     Actions.UNCOMPLETE_TASK to ::uncomplete,
     Actions.QUIT to ::quit,
 )
-

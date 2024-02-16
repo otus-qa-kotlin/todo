@@ -7,4 +7,3 @@ enum class Actions {
     UNCOMPLETE_TASK,
     QUIT
 }
-
