@@ -1,13 +1,11 @@
 package data
 
 enum class Priority {
-    LOW,
-    MEDIUM,
-    HIGH
+    LOW, MEDIUM, HIGH
 }
 
 data class Task(val id: Int? = null, val name: String, var priority: Priority, var completed: Boolean = false) {
-    override fun toString(): String = ("$id. [${if (completed) "x" else " "}] $name : ${priority}")
+    override fun toString(): String = ("$id. [${if (completed) "x" else " "}] $name : $priority")
 }
 
 abstract class TasksRepository {

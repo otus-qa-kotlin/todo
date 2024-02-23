@@ -1,4 +1,5 @@
 import data.TasksRepositoryMemory
+import menu.Actions
 import menu.taskActions
 
 fun renderMenu(): Int {
@@ -23,7 +24,7 @@ fun main() {
             val func = taskActions[Actions.values()[action - 1]]
             func?.call(repository)
         } catch (e: ArrayIndexOutOfBoundsException) {
-            //just skip
+            // just skip
         }
     }
 }

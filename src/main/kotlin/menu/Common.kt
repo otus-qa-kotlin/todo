@@ -1,3 +1,5 @@
+package menu
+
 enum class Actions {
     ADD_TASK,
     DELETE_TASK,
@@ -7,4 +9,3 @@ enum class Actions {
     UNCOMPLETE_TASK,
     QUIT
 }
-
